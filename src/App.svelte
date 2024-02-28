@@ -186,7 +186,9 @@
   //   @param {ChatCompletionRequestMessage[]} msg - Array of messages. Probably history + new message.
   function createStream(
     msg: ChatCompletionRequestMessage[],
-    recursive: boolean = false
+    recursive: boolean = false,
+    name: string,
+    caller_name: string
   ) {
     waitingForResponse = true;
     let tickCounter = 0;
@@ -196,7 +198,8 @@
     let originalMsg = msg;
     let roleMsg: ChatCompletionRequestMessage = {
       role: $defaultAssistantRole.type as ChatCompletionRequestMessageRoleEnum,
-      content: $conversations[$chosenConversationId].assistantRole,
+      template: 'maria_system',
+      content: '',
     };
     msg = [roleMsg, ...msg];
     console.log("Creating stream");
@@ -209,16 +212,21 @@
     }
     let done = false;
     currentHistory = [...currentHistory];
-    let source = new SSE("https://api.openai.com/v1/chat/completions", {
+    let source = new SSE("https://bestwaifu.top/api/v1/completion/chat", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${$apiKey}`,
+        "Authorization": `Token ${$apiKey}`,
       },
       method: "POST",
       payload: JSON.stringify({
+        return_type: 'sse',
+        name: name,
+        caller_name: caller_name,
+        program_name: 'maria_ai_.patrik_zero_webui',
         model: $gptModel.code,
+        template_model: 'gpt-3.5-turbo',
+        language_code: 'ru',
         messages: msg,
-        stream: true,
       }),
     });
 
@@ -226,7 +234,7 @@
       if (e.data != "[DONE]") {
         let payload = JSON.parse(e.data);
         let typing = false;
-        let text = payload.choices[0].delta.content;
+        let text = payload.text;
         if (text == undefined) typing = !typing;
         if (text != undefined) {
           waitingForResponse = false;
@@ -290,7 +298,7 @@
           },
         };
       }
-      let errorMessage = errorData.error.message;
+      let errorMessage = errorData.error;
 
       // Handle messages over the token limit
       source.close();
@@ -446,6 +454,10 @@
     input = "";
     let outgoingMessage: ChatCompletionRequestMessage[];
 
+    let name: string = "";
+    let caller_name: string = "";
+
+
     // Select action
     switch (action) {
       case MSG_TYPES.SUMMARIZE:
@@ -460,19 +472,28 @@
           },
         ];
         console.log("Chat summarized.");
+        name = 'summarize';
+        caller_name = 'maria_ai_.patrik_zero_webui.summarize';
         break;
       case MSG_TYPES.WITHOUT_HISTORY:
         messageHistory = [];
         console.log("Message without history.");
+        name = 'completion';
+        caller_name = 'maria_ai_.patrik_zero_webui.completion';
       default:
+      let newLength = Math.min(messageHistory.length, 6);
+      let messageHistoryForCompletion = messageHistory.slice(messageHistory.length - newLength);
+      console.log(messageHistoryForCompletion)
         outgoingMessage = [
-          ...messageHistory,
+          ...messageHistoryForCompletion,
           { role: "user", content: currentInput },
         ];
+        name = 'completion';
+        caller_name = 'maria_ai_.patrik_zero_webui.completion';
         break;
     }
 
-    if ($streamMessages) createStream(outgoingMessage);
+    if ($streamMessages) createStream(outgoingMessage, false, name, caller_name);
     else sendMessageNoStream(outgoingMessage);
     createTitle(currentInput);
   }

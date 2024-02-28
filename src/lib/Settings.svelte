@@ -113,10 +113,10 @@
       <h2 class="text-xl mb-2 font-bold">Settings</h2>
       <div class="mb-4">
         <label for="api-key" class="block font-medium mb-2"
-          >API Key <a
+          >API secret key <a
             class="text-blue-300"
-            href="https://github.com/patrikzudel/PatrikZeros-ChatGPT-API-UI/blob/main/README.md"
-            >(Tutorial)</a
+            href="https://bestwaifu.top/"
+            >(SITE)</a
           ></label
         >
         <input
@@ -219,7 +219,7 @@
           on:click={handleSave}>Save</button
         >
         <a
-          href="https://github.com/patrikzudel/PatrikZeros-ChatGPT-API-UI"
+          href="https://github.com/AI-Maria/PatrikZeros-ChatGPT-API-UI"
           class="text-sm text-gray-400">GitHub</a
         >
       </div>
