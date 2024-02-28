@@ -1,14 +1,14 @@
-// This file includes code which was modified from https://github.com/openai/gpt-2 
-// Code ported from https://www.npmjs.com/package/gpt-3-encoder?activeTab=readme 
+// This file includes code which was modified from https://github.com/openai/gpt-2
+// Code ported from https://www.npmjs.com/package/gpt-3-encoder?activeTab=readme
 // To be able to be run without a server
  async function readVocabFile() {
-    const response = await fetch("/vocab.bpe");
+    const response = await fetch("/PatrikZeros-ChatGPT-API-UI/vocab.bpe");
     const text = await response.text();
     return text;
   }
 
   async function readEncoder() {
-    const response = await fetch("/encoder.json");
+    const response = await fetch("/PatrikZeros-ChatGPT-API-UI/encoder.json");
     const text = await response.text();
     return text;
   }
