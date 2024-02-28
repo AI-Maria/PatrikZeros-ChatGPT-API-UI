@@ -287,9 +287,10 @@
     source.addEventListener("error", (e) => {
       if (done) return;
       configuration = null;
-      let errorData;
+      let errorData: {};
       try {
         errorData = JSON.parse(e.data);
+        console.log(errorData);
       } catch {
         errorData = {
           error: {
@@ -301,7 +302,7 @@
       let errorMessage = errorData.error;
 
       // Handle messages over the token limit
-      source.close();
+      /*source.close();
       waitingForResponse = false;
       if (errorMessage.includes("maximum context length")) {
         if (originalMsg.length > 1) {
@@ -311,7 +312,7 @@
           createStream(originalMsg, true);
           return;
         }
-      }
+      }*/
 
       console.log("Stream closed on error");
       console.error(e);
