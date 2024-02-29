@@ -303,7 +303,13 @@
           },
         };
       }
-      let errorMessage = errorData.error;
+      let errorMessage = ''
+      if (errorData.detail != undefined) {
+          errorMessage = errorData.detail;
+      }
+      if (errorData.error != undefined) {
+          errorMessage = errorData.error;
+      }
 
       // Handle messages over the token limit
       /*source.close();
