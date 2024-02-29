@@ -172,7 +172,7 @@
       setHistory([
         {
           role: "system",
-          content: "Enter your OpenAI API key in the Settings.",
+          content: "Enter your BestWaifu.top API secret key in the Settings.",
         },
       ]);
       return false;
