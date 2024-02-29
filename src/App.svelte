@@ -230,9 +230,13 @@
       }),
     });
 
+    let waifutokens = 0;
     source.addEventListener("message", (e) => {
       if (e.data != "[DONE]") {
         let payload = JSON.parse(e.data);
+        if (payload.waifutokens_in != undefined && payload.waifutokens_out != undefined) {
+            waifutokens = payload.waifutokens_in + payload.waifutokens_out
+        }
         let typing = false;
         let text = payload.text;
         if (text == undefined) typing = !typing;
@@ -276,7 +280,7 @@
             content: streamText,
           },
         ];
-        addTokens(countMessagesTokens(msg));
+        addTokens(waifutokens);
         streamText = "";
         done = true;
         console.log("Stream closed");

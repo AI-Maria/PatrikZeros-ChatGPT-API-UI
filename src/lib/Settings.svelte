@@ -191,10 +191,7 @@
       <div class="mb-4 flex flex-col justify-between items-start">
         <div class="flex justify-between items-center">
           <p class="block font-bold">
-            Tokens spent: {$combinedTokens.toFixed(0)} | {(
-              ($combinedTokens / 1000) *
-              (($gptModel.inputCost + $gptModel.outputCost) / 2)
-            ).toFixed(4)} $
+            Tokens spent: {$combinedTokens.toFixed(0)}
           </p>
           <button
             on:click={clearTokens}
