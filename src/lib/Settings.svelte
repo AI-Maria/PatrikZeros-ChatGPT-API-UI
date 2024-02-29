@@ -180,7 +180,6 @@
           class="max-w-[256px] text-black bg-white mb-2 p-2 rounded focus:outline-none focus:bg-white"
         >
           <option value="true">Stream</option>
-          <option value="false">Request (Experimental)</option>
         </select>
       </div>
       {#if modelNameField !== oldNameField}
