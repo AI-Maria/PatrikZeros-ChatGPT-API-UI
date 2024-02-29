@@ -127,22 +127,6 @@
           bind:value={apiTextField}
         />
       </div>
-      <div class="mb-0">
-        <label for="api-key" class="block font-medium mb-1"
-          >Default Assistant role</label
-        >
-        <input
-          class="border text-black border-gray-300 p-2 rounded w-full"
-          bind:value={assistantRoleField}
-        />
-        <select
-          bind:value={assistantRoleTypeField}
-          class="max-w-[86px] text-black bg-white my-2 p-2 rounded focus:outline-none focus:bg-white"
-        >
-          <option value="system">System</option>
-          <option value="user">User</option>
-        </select>
-      </div>
       <div>
         <label for="model" class="block font-medium mb-1">Chosen model</label>
         <select

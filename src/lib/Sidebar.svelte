@@ -106,13 +106,6 @@ You are a therapist. ETC...`;
               {conv.conversationTokens.toFixed(0)}
             </p>
           </button>
-          {#if $chosenConversationId === $conversations.length - i - 1}
-            <textarea
-              bind:value={$conversations[$chosenConversationId].assistantRole}
-              {placeholder}
-              class="bg-primary px-2 pt-1 mb-2 pb-3 resize-none ronded-t-none rounded-b-md focus:outline-none focus:outline-primary"
-            />
-          {/if}
         {/each}
         <!-- TUTO KONCI PRIKLAD -->
       </div>
