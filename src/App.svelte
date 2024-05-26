@@ -215,7 +215,7 @@
     let source = new SSE("https://bestwaifu.top/api/v1/completion/chat", {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Token ${$apiKey}`,
+        "Authorization": `Bearer ${$apiKey}`,
       },
       method: "POST",
       payload: JSON.stringify({
