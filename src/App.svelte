@@ -227,6 +227,7 @@
         template_model: 'gpt-3.5-turbo',
         language_code: 'ru',
         messages: msg,
+        stream: true,
       }),
     });
 
